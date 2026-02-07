@@ -84,7 +84,12 @@ router.post("/bridge", async (req, res) => {
     }
 
     const amountWei = ethers.parseUnits(String(amount), 6);
-    const recipientBytes32 = ethers.zeroPadValue(recipient || sender, 32);
+    let recipientBytes32;
+    try {
+      recipientBytes32 = ethers.zeroPadValue(recipient || sender, 32);
+    } catch {
+      recipientBytes32 = ethers.keccak256(ethers.toUtf8Bytes(recipient || sender));
+    }
 
     // Build the CCTP burn transaction
     const burnTx = {
