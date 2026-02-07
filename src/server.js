@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 const { ethers } = require("ethers");
 
 const taskRoutes = require("./routes/tasks");
@@ -13,8 +14,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Health check
-app.get("/", (req, res) => {
+// Serve static frontend
+app.use(express.static(path.join(__dirname, '..', 'public')));
+
+// API health check (moved from / to /api)
+app.get("/api", (req, res) => {
   res.json({
     name: "NexusPay",
     version: "1.0.0",
@@ -50,7 +54,6 @@ app.use("/api/cctp", cctpRoutes);
 
 // x402 payment verification middleware (for protected endpoints)
 app.get("/api/x402/sentiment-analysis", require("./middleware/x402Paywall").paywall(10000), (req, res) => {
-  // Example x402-protected endpoint: agent pays 0.01 USDC per call
   res.json({
     service: "sentiment-analysis",
     result: {
@@ -75,8 +78,27 @@ app.get("/api/x402/data-enrichment", require("./middleware/x402Paywall").paywall
   });
 });
 
+// SPA fallback — serve index.html for non-API routes
+app.get('*', (req, res) => {
+  if (!req.path.startsWith('/api')) {
+    res.sendFile(path.join(__dirname, '..', 'public', 'index.html'));
+  }
+});
+
 const PORT = process.env.PORT || 3456;
 app.listen(PORT, () => {
-  console.log(`NexusPay API running on port ${PORT}`);
-  console.log(`Health check: http://localhost:${PORT}/`);
+  console.log(`NexusPay running on port ${PORT}`);
+  console.log(`Dashboard: http://localhost:${PORT}/`);
+  console.log(`API: http://localhost:${PORT}/api`);
+
+  // Auto-seed demo data
+  if (process.env.SEED_DEMO === 'true') {
+    setTimeout(() => {
+      require('./seed')(PORT).then(() => {
+        console.log('Demo data seeded successfully');
+      }).catch(err => {
+        console.error('Seed failed:', err.message);
+      });
+    }, 1000);
+  }
 });
