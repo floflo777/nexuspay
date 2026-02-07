@@ -43,7 +43,7 @@ NexusPay composes **5 Circle products** into one unified layer:
 │  /reputation │                              │
 │  /cctp       │                              │
 ├──────────────┴──────────────────────────────┤
-│         Smart Contracts (Base Sepolia)       │
+│       Smart Contracts (Ethereum Sepolia)     │
 │  NexusEscrow: milestone payments + disputes │
 │  NexusReputation: trust scores + ratings    │
 ├─────────────────────────────────────────────┤
@@ -88,8 +88,8 @@ cp .env.example .env
 # Compile contracts
 npx hardhat compile
 
-# Deploy to Base Sepolia
-npx hardhat run scripts/deploy.js --network baseSepolia
+# Deploy to Ethereum Sepolia
+npx hardhat run scripts/deploy.js --network sepolia
 
 # Start API server
 npm start
@@ -117,6 +117,14 @@ node scripts/demo-transactions.js
 | `/api/reputation/:address` | GET | Get trust score |
 
 ## Smart Contracts
+
+### Deployed on Ethereum Sepolia
+
+| Contract | Address | Etherscan |
+|---|---|---|
+| **NexusEscrow** | `0x2D19CFa1bd38cD899E5ff939A3BDc83696806494` | [View](https://sepolia.etherscan.io/address/0x2D19CFa1bd38cD899E5ff939A3BDc83696806494) |
+| **NexusReputation** | `0xB995bC73E19eE5C009B1183637811619a53003C1` | [View](https://sepolia.etherscan.io/address/0xB995bC73E19eE5C009B1183637811619a53003C1) |
+| **USDC** (Circle testnet) | `0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238` | [View](https://sepolia.etherscan.io/address/0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238) |
 
 ### NexusEscrow.sol
 Milestone-based USDC escrow for agent tasks:
@@ -171,7 +179,7 @@ The skill teaches your agent to:
 - **Circle Programmable Wallets** (wallet management)
 - **Circle CCTP V2** (cross-chain transfers)
 - **x402 Protocol** (HTTP micropayments)
-- **Base Sepolia + Arbitrum Sepolia** (testnet deployment)
+- **Ethereum Sepolia** (primary deployment) + **Base Sepolia / Arbitrum Sepolia** (CCTP cross-chain)
 
 ## License
 

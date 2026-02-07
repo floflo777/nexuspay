@@ -1,0 +1,12 @@
+{
+  "network": "sepolia",
+  "chainId": "11155111",
+  "deployer": "0xE2EbE1209739D0E4468d5ce9597CF6AFc8bAb9a4",
+  "contracts": {
+    "NexusEscrow": "0x2D19CFa1bd38cD899E5ff939A3BDc83696806494",
+    "NexusReputation": "0xB995bC73E19eE5C009B1183637811619a53003C1",
+    "USDC": "0x1c7D4B196Cb0C7B01d743Fbc6116a902379C7238"
+  },
+  "deployedAt": "2026-02-07T00:30:12.942Z",
+  "blockNumber": 10206994
+}

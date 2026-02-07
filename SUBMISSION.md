@@ -55,7 +55,7 @@ No other project in this hackathon uses more than one Circle product. We use fiv
 │  /reputation │                              │
 │  /cctp       │                              │
 ├──────────────┴──────────────────────────────┤
-│         Smart Contracts (Base Sepolia)       │
+│       Smart Contracts (Ethereum Sepolia)     │
 │  NexusEscrow: milestone payments + disputes │
 │  NexusReputation: trust scores + ratings    │
 ├─────────────────────────────────────────────┤
@@ -86,20 +86,22 @@ No other project in this hackathon uses more than one Circle product. We use fiv
 | OpenClaw skill | ✅ | ❌ | Partial | ❌ |
 | **Circle products used** | **5** | 0 | 0 | 1 |
 
-## Smart Contracts (Base Sepolia)
+## Smart Contracts (Ethereum Sepolia — Live & Verified)
 
-**NexusEscrow** — Milestone-based USDC escrow:
+**NexusEscrow** ([`0x2D19...6494`](https://sepolia.etherscan.io/address/0x2D19CFa1bd38cD899E5ff939A3BDc83696806494)) — Milestone-based USDC escrow:
 - Multi-milestone tasks (1-10 per task)
 - Deliverable hash verification (keccak256)
 - Dispute resolution with admin arbitration
 - 1.5% platform fee
 - CCTP hook metadata for cross-chain payouts
 
-**NexusReputation** — Soulbound on-chain reputation:
+**NexusReputation** ([`0xB995...9e7a`](https://sepolia.etherscan.io/address/0xB995bC73E19eE5C009B1183637811619a53003C1)) — Soulbound on-chain reputation:
 - Trust score from ratings + task completion
 - x402 API service stats tracking
 - Dispute history impact
 - Agent leaderboard
+
+On-chain demo transactions: 2 agents registered, cross-rated, trust scores computed — all verifiable on Etherscan.
 
 ## Test Results
 
